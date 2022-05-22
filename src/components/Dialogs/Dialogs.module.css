@@ -1,0 +1,28 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+.header{
+    display: grid;
+    grid-template-rows: 12fr;
+    text-align: center;
+}
+.dialogsItems {
+    padding: 10px;
+    color: white;
+}
+.dialogsItems .active{
+    color: firebrick;
+}
+
+.dialog {
+
+}
+
+messages {
+    padding: 10px;
+}
+
+message {
+    color: white;
+}
