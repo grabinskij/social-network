@@ -1,24 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import Sidebar from './components/Sidebar/Sidebar';
-import Dialogs from "./components/Dialogs/Dialogs";
 import Settings from "./components/Settings/Settings";
 import Musik from "./components/Musik/Musik";
 import News from "./components/News/News";
-import {Route, Routes, withRouter} from "react-router-dom";
-import store, {addMessage, addPost, updateNewMessageText} from "./redux/store";
+import {BrowserRouter, Route, Routes, withRouter} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
-import {connect} from "react-redux";
-import {getAuthUserData} from "./redux/auth-reducer";
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import store from "./redux/redux-store";
 
 
 class App extends React.Component {
@@ -54,6 +50,18 @@ const mapStateToProps = (state) => ({
   initialized: state.app.initialized
 })
 
-export default compose(
+let AppContainer = compose(
     // withRouter,
     connect(mapStateToProps, {initializeApp})) (App);
+
+const SamuraiJSApp = (props) => {
+   return <BrowserRouter>
+        <Provider store={store}>
+            <React.StrictMode>
+                <AppContainer />
+            </React.StrictMode>
+        </Provider>
+    </BrowserRouter>
+}
+
+export default SamuraiJSApp;
